@@ -2,9 +2,16 @@ import React from 'react';
 import { InventoryList } from './Inventory';
 
 export class AddItem extends React.Component {
-    handleClick(e) {
-        let itemName = itemName;
-        InventoryList.items.push(itemName); 
+    state = {
+        itemName: ''
+    };
+
+    handleChange = event => {
+        this.setState({ itemName: event.target.value });
+    }
+
+    handleClick = () => {
+        InventoryList.items.push(this.state.itemName); 
     }
 
     render() {
@@ -13,10 +20,11 @@ export class AddItem extends React.Component {
                 className={ this.constructor.name }>
                 <input 
                 id="inputName"
-                value={itemName}
-                placeholder="Item name..." />
+                value={this.state.itemName}
+                placeholder="Item name..."
+                onChange={this.handleChange} />
                 <button 
-                onClick={this.handleClick()} >
+                onClick={this.handleClick} >
                     Add
                 </button>
             </div>
